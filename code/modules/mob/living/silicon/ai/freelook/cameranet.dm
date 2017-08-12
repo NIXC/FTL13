@@ -152,6 +152,14 @@ GLOBAL_DATUM_INIT(cameranet, /datum/cameranet, new)
 		statclick = new/obj/effect/statclick/debug(null, "Initializing...", src)
 
 	stat(name, statclick.update("Cameras: [GLOB.cameranet.cameras.len] | Chunks: [GLOB.cameranet.chunks.len]"))
+/datum/cameranet/proc/reset_chunks()
+	chunks.len = 0 //We lazy kill the chunks. they rebuild themselves on demand as required
+	for(var/ai in GLOB.ai_list)
+		var/mob/living/silicon/ai/AI = ai
+		if(AI.deployed_shell)
+			continue
+		GLOB.cameranet.visibility(AI.eyeobj)
+		
 
 // Debug verb for VVing the chunk that the turf is in.
 /*

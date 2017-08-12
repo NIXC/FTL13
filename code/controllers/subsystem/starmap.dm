@@ -277,6 +277,7 @@ SUBSYSTEM_DEF(starmap)
 	if(target == ftl.get_docked())
 		return 1
 	ftl.dock(target)
+	GLOB.cameranet.reset_chunks() //solves cameranet issues
 	return 0
 
 /datum/controller/subsystem/starmap/Recover()
